@@ -1,0 +1,69 @@
+# Stage 1: Build the application
+FROM node:20-alpine as builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --force
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Stage 2: Serve the application using a lightweight image for production
+FROM node:20-alpine as production
+
+# Set environment variables
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only the necessary files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm install --force --only=production
+
+# Copy the build output from the builder stage
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+
+# Expose the port
+EXPOSE 3000
+
+# Start the Next.js application
+CMD ["npm", "start"]
+
+# Stage 3: Development stage
+FROM node:20-alpine as development
+
+# Set environment variables
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install all dependencies (including dev dependencies)
+RUN npm install --force
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port
+EXPOSE 3000
+
+# Start the Next.js application in development mode
+CMD ["npm", "run", "dev"]

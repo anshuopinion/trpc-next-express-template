@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+      target: development
+    volumes:
+      - ./backend:/app
+      - /app/node_modules # To avoid conflicts with host's node_modules
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev # Adjust this to your dev command if different
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+      target: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # To avoid conflicts with host's node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    command: npm run dev # Adjust this to your dev command if different

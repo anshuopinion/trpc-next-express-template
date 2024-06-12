@@ -1,0 +1,140 @@
+{
+  "Typescript React PureComponent": {
+    "prefix": "rpc",
+    "body": [
+      "import * as React from 'react'",
+      "",
+      "export class $1 extends React.PureComponent {",
+      "\trender() {",
+      "\t\treturn ($2);",
+      "}}"
+    ],
+    "description": "Typescript React PureComponent"
+  },
+
+  "Typescript React Function Component": {
+    "prefix": "rh",
+    "body": [
+      "import {FC} from 'react'",
+      "",
+      "interface I${TM_FILENAME_BASE}Props {",
+      "$1",
+      "}",
+      "",
+      "const $TM_FILENAME_BASE: FC<I${TM_FILENAME_BASE}Props> = ({$2}) => {",
+      "\t\treturn ($3);",
+      "}",
+      "export default $TM_FILENAME_BASE"
+    ],
+    "description": "Typescript React Function Component"
+  },
+  "React Native StyleSheet": {
+    "prefix": "rnss",
+    "body": [
+      "import {StyleSheet} from 'react-native'",
+      "const styles = StyleSheet.create({",
+      "",
+      "});"
+    ],
+    "description": "React Native StyleSheet"
+  },
+  "Toggle State": {
+    "prefix": "tog",
+    "body": ["this.setState(state => ({", "\topen: !state.open", "}));"],
+    "description": "toggle state"
+  },
+  "console.log": {
+    "prefix": "cl",
+    "body": ["console.log($1)"],
+    "description": "console.log"
+  },
+  "className={classnames()}": {
+    "prefix": "cc",
+    "body": ["className={classnames('$1')}"],
+    "description": "tailwind react stuff"
+  },
+  "Fomrik Snipit": {
+    "prefix": "fmk",
+    "body": [
+      "<Formik initialValues={{$1}} onSubmit={(values) => {console.log(values);}} >",
+      "          <Form>",
+      "${2}",
+      "</Form>",
+      "        </Formik>"
+    ],
+    "description": "Fomrik Snipit"
+  },
+  "Import react": {
+    "prefix": "ir",
+    "body": ["import React from 'react';"]
+  },
+  "Next.js Function Component": {
+    "prefix": "nfc",
+    "body": [
+      "export interface ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props {}",
+      "",
+      "export function ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}(props: ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props) {",
+      "\tconst {} = props;",
+      "\t",
+      "\treturn (<>$1</>);",
+      "}"
+    ]
+  },
+  "React Custom Hook": {
+    "prefix": "rch",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "export interface ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props {}",
+      "",
+      "export function ${TM_FILENAME_BASE/.*/${0:/camelcase}/}(props: ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props ={}) {",
+      "\tconst {} = props;",
+      "\t",
+      "\treturn {}",
+      "}"
+    ]
+  },
+  "Next.js Page Component": {
+    "prefix": "nfcp",
+    "body": [
+      "export interface ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}PageProps {}",
+      "",
+      "export default function ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Page(props: ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}PageProps) {",
+      "\tconst {} = props;",
+      "\t",
+      "\treturn (<>$1</>);",
+      "}"
+    ]
+  },
+  "Next.js Page Component (NESTED)": {
+    "prefix": "nfcpn",
+    "body": [
+      "export interface ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/}PageProps {}",
+      "",
+      "export default function ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/}Page(props: ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/}PageProps) {",
+      "\tconst {} = props;",
+      "\t",
+      "\treturn (<$1>$2</$1>);",
+      "}"
+    ]
+  },
+  "Next.js Functional Component Wrapper": {
+    "prefix": "nfcw",
+    "body": [
+      "export interface ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props {",
+      "\tchildren: React.ReactNode;",
+      "}",
+      "",
+      "export function ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}(props: ${TM_FILENAME_BASE/.*/${0:/pascalcase}/}Props) {",
+      "\tconst { children } = props;",
+      "\t",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t$1",
+      "\t\t\t{children}",
+      "\t\t</>",
+      "\t);",
+      "}"
+    ]
+  }
+}
